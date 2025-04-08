@@ -64,7 +64,7 @@ void afisareListaMasini(Nod* nod) {
 }
 
 void adaugaMasinaInLista(Nod** lista, Masina masinaNoua) {
-	Nod* nodNou = (Nod*)malloc(sizeof(Nod));
+	Nod* nodNou = (Nod*)malloc(sizeof(Nod) );
 	nodNou->info = masinaNoua;
 	nodNou->next = NULL;
 
@@ -82,9 +82,12 @@ void adaugaMasinaInLista(Nod** lista, Masina masinaNoua) {
 	}
 
 }
-
-void adaugaLaInceputInLista(/*lista de masini*/ Masina masinaNoua) {
-	//adauga la inceputul listei o noua masina pe care o primim ca parametru
+//*adaugate recent
+void adaugaLaInceputInLista(Nod** lista, Masina masinaNoua) {
+	Nod* nou = (Nod*)malloc(sizeof(Nod));
+	nou->info = masinaNoua;
+	nou->next = *lista;
+	*lista = nou;
 }
 
 Nod* citireListaMasiniDinFisier(const char* numeFisier) {
@@ -128,11 +131,36 @@ float calculeazaPretMediu(Nod* lista) {
 	return suma / contor;
 
 }
+//*adaugate recent
+void stergeMasiniDinSeria(Nod** lista, char serieCautata) {
+	Nod* curent = *lista;
+	Nod* anterior = NULL;
 
-void stergeMasiniDinSeria(/*lista masini*/ char serieCautata) {
-	//sterge toate masinile din lista care au seria primita ca parametru.
-	//tratati situatia ca masina se afla si pe prima pozitie, si pe ultima pozitie
+	while (curent != NULL) {
+		if (curent->info.serie == serieCautata) {
+			Nod* deSters = curent;
+
+			if (anterior == NULL) {
+				// Elementul de sters este primul
+				*lista = curent->next;
+				curent = *lista;
+			}
+			else {
+				anterior->next = curent->next;
+				curent = curent->next;
+			}
+
+			free(deSters->info.model);
+			free(deSters->info.numeSofer);
+			free(deSters);
+		}
+		else {
+			anterior = curent;
+			curent = curent->next;
+		}
+	}
 }
+
 
 float calculeazaPretulMasinilorUnuiSofer(Nod* lista, const char* numeSofer) {
 	//calculeaza pretul tuturor masinilor unui sofer.
