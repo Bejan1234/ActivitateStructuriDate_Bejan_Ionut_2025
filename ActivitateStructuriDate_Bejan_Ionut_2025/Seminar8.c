@@ -87,12 +87,12 @@ void filtreazaHeap(Heap* heap, int pozitieNod) {
 		heap->vector[pozitieNod] = aux;
 
 		// 2*pozMax + 1 <= heap.nrMasini - 1
-		if (pozMax < (heap->nrMasini-2)/2) {
+		if (pozMax < (heap->nrMasini - 2) / 2) {
 			filtreazaHeap(heap, pozMax);
 		}
 	}
 
-	
+
 }
 
 Heap citireHeapDeMasiniDinFisier(const char* numeFisier) {
@@ -106,7 +106,7 @@ Heap citireHeapDeMasiniDinFisier(const char* numeFisier) {
 	}
 	fclose(f);
 
-	for (int i = (h.nrMasini - 2 / 2);i >= 0;i--)
+	for (int i = (h.nrMasini - 2 / 2); i >= 0; i--)
 	{
 		filtreazaHeap(&h, i);
 	}
@@ -155,7 +155,7 @@ Masina extrageMasina(Heap* heap) {
 
 
 void dezalocareHeap(Heap* heap) {
-	for (int i = 0; i < heap->lungime;i++)
+	for (int i = 0; i < heap->lungime; i++)
 	{
 		free(heap->vector[i].model);
 		free(heap->vector[i].numeSofer);
