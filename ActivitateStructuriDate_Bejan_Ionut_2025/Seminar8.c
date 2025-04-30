@@ -33,44 +33,24 @@ typedef struct Nod Nod;
 Masina citireMasinaDinFisier(FILE* file) {
 	char buffer[100];
 	char sep[3] = ",\n";
-	Masina m1;
-	m1.model = NULL;
-	m1.numeSofer = NULL;
-
-	if (fgets(buffer, 100, file) == NULL) {
-		return m1;
-	}
-
+	fgets(buffer, 100, file);
 	char* aux;
+	Masina m1;
 	aux = strtok(buffer, sep);
-	if (aux == NULL) return m1;
 	m1.id = atoi(aux);
-
+	m1.nrUsi = atoi(strtok(NULL, sep));
+	m1.pret = atof(strtok(NULL, sep));
 	aux = strtok(NULL, sep);
-	if (aux == NULL) return m1;
-	m1.nrUsi = atoi(aux);
-
-	aux = strtok(NULL, sep);
-	if (aux == NULL) return m1;
-	m1.pret = atof(aux);
-
-	aux = strtok(NULL, sep);
-	if (aux == NULL) return m1;
 	m1.model = malloc(strlen(aux) + 1);
-	strcpy(m1.model, aux);
+	strcpy_s(m1.model, strlen(aux) + 1, aux);
 
 	aux = strtok(NULL, sep);
-	if (aux == NULL) return m1;
 	m1.numeSofer = malloc(strlen(aux) + 1);
-	strcpy(m1.numeSofer, aux);
+	strcpy_s(m1.numeSofer, strlen(aux) + 1, aux);
 
-	aux = strtok(NULL, sep);
-	if (aux == NULL) return m1;
-	m1.serie = *aux;
-
+	m1.serie = *strtok(NULL, sep);
 	return m1;
 }
-
 
 void afisareMasina(Masina masina) {
 	printf("Id: %d\n", masina.id);
@@ -107,41 +87,32 @@ void filtreazaHeap(Heap* heap, int pozitieNod) {
 		heap->vector[pozitieNod] = aux;
 
 		// 2*pozMax + 1 <= heap.nrMasini - 1
-		if (pozMax < (heap->nrMasini - 2) / 2) {
+		if (pozMax < (heap->nrMasini-2)/2) {
 			filtreazaHeap(heap, pozMax);
 		}
 	}
 
-
+	
 }
 
 Heap citireHeapDeMasiniDinFisier(const char* numeFisier) {
 	Heap h = initializareHeap(10);
 	FILE* f = fopen(numeFisier, "r");
-	if (!f) {
-		printf("Eroare la deschiderea fisierului %s\n", numeFisier);
-		Heap emptyHeap = { NULL, 0, 0 };
-		return emptyHeap;
-	}
 
 	while (!feof(f))
 	{
-		Masina m = citireMasinaDinFisier(f);
-		if (m.model == NULL || m.numeSofer == NULL) {
-			break; // nu mai am ce citi
-		}
-		h.vector[h.nrMasini++] = m;
+		h.vector[h.nrMasini] = citireMasinaDinFisier(f);
+		h.nrMasini++;
 	}
 	fclose(f);
 
-	for (int i = (h.nrMasini - 2) / 2; i >= 0; i--)
+	for (int i = (h.nrMasini - 2 / 2);i >= 0;i--)
 	{
 		filtreazaHeap(&h, i);
 	}
 
 	return h;
 }
-
 
 void afisareHeap(Heap heap) {
 	if (heap.vector)
@@ -154,17 +125,15 @@ void afisareHeap(Heap heap) {
 }
 
 void afiseazaHeapAscuns(Heap heap) {
-	if (heap.vector) {
-		for (int i = heap.nrMasini; i < heap.lungime; i++)
-		{
-			afisareMasina(heap.vector[i]);
-		}
+	//afiseaza elementele ascunse din heap
+	for (int i = heap.nrMasini; i < heap.lungime; i++)
+	{
+		afisareMasina(heap.vector[i]);
 	}
 }
 
-
 Masina extrageMasina(Heap* heap) {
-	if (heap->nrMasini > 0)
+	if (heap->lungime > 0)
 	{
 		Masina aux = heap->vector[0];
 		heap->vector[0] = heap->vector[heap->nrMasini - 1];
@@ -185,9 +154,8 @@ Masina extrageMasina(Heap* heap) {
 }
 
 
-
 void dezalocareHeap(Heap* heap) {
-	for (int i = 0; i < heap->lungime; i++)
+	for (int i = 0; i < heap->lungime;i++)
 	{
 		free(heap->vector[i].model);
 		free(heap->vector[i].numeSofer);
