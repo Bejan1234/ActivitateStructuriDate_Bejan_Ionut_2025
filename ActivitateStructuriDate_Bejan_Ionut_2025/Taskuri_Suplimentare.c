@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS   //Task 1 și Task 2 – Structura + Vectori
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
