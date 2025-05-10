@@ -1,0 +1,5 @@
+FarmFamilia,5,3.5
+Catena,8,2.5
+FarmaciaBuna,9,4.6
+MariaFarm, 10,5.6
+IonFarm, 3, 7.1
