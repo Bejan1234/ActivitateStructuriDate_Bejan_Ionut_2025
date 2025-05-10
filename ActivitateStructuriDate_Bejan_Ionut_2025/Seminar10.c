@@ -162,4 +162,5 @@ int main() {
 	Nod* arbore = citireArboreDeMasiniDinFisier("masini.txt");
 	afisarePreOrdine(arbore);
 	return 0;
+
 }
