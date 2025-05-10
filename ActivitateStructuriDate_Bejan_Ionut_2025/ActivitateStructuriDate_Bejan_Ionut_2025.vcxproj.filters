@@ -39,9 +39,6 @@
     <ClCompile Include="Seminar9.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Exersare.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Seminar10.c">
       <Filter>Source Files</Filter>
     </ClCompile>
