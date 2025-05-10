@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <string.h>
 
 struct Masina {
 	int id;
@@ -51,6 +52,7 @@ void dezalocare(struct Masina* m) {
 
 int main() {
 	struct Masina masina;
+
 	masina = initializare(1, 2004, "Robert", 2000, 'P');
 	afisare(masina);
 

@@ -72,6 +72,7 @@ void dezalocare(struct Masina** vector, int* nrElemente) {
 }
 
 void copiazaMasiniCuMultiKM(struct Masina* vector, int nrElemente, float prag, struct Masina** vectorNou, int* dimensiune) {
+    // 1. Numãrãm câte ma?ini trec de prag
     if (vector != NULL && nrElemente > 0) {
         (*dimensiune) = 0;
         for (int i = 0; i < nrElemente; i++) {
@@ -79,8 +80,9 @@ void copiazaMasiniCuMultiKM(struct Masina* vector, int nrElemente, float prag, s
                 (*dimensiune)++;
             }
         }
-
+        // 2. Alocãm vectorul nou
         *vectorNou = (struct Masina*)malloc(sizeof(struct Masina) * (*dimensiune));
+        // 3. Copiem ma?inile selectate
         if (*vectorNou) {
             int contor = 0;
             for (int i = 0; i < nrElemente; i++) {
@@ -103,14 +105,17 @@ struct Masina getPrimaMasinaDupaSofer(struct Masina* vector, int nrElemente, con
 }
 
 int main() {
+
+    //met afisare vector
     int nrElemente = 3;
-    struct Masina* vector = (struct Masina*)malloc(sizeof(struct Masina) * nrElemente);
+    struct Masina* vector = (struct Masina*)malloc(sizeof(struct Masina) * nrElemente);//Aceastã linie de cod alocã dinamic un vector (array) de structuri Masina în memorie.
     if (!vector) return 1;
 
     vector[0] = initializare(1, 2000, "Ion", 5000, 'A');
     vector[1] = initializare(2, 2001, "Ana", 3000, 'F');
     vector[2] = initializare(3, 2002, "Stefan", 7500, 'M');
     afisareVector(vector, nrElemente);
+    //met copiaza primele n elemente\
 
     int nrElementeNoi = 3;
     struct Masina* vectorNou = copiazaPrimeleNElemente(vector, nrElemente, nrElementeNoi);
@@ -118,7 +123,7 @@ int main() {
     afisareVector(vectorNou, nrElementeNoi);
 
     dezalocare(&vector, &nrElemente);
-
+    //copiaza masini cu multi km
     float prag = 3500;
     copiazaMasiniCuMultiKM(vectorNou, nrElementeNoi, prag, &vector, &nrElemente);
     printf("Masini cu multi km: \n");

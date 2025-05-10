@@ -15,7 +15,7 @@ struct StructuraMasina {
 	unsigned char serie;
 };
 typedef struct StructuraMasina Masina;
-
+//*
 void afisareMasina(Masina masina) {
 	printf("Id: %d\n", masina.id);
 	printf("Nr usi: %d\n", masina.nrUsi);
@@ -24,7 +24,7 @@ void afisareMasina(Masina masina) {
 	printf("Nume Sofer: %s\n", masina.numeSofer);
 	printf("Serie: %c\n", masina.serie);
 }
-
+//*
 void afisareVectorMasini(Masina* masini, int nrMasini) {
 	for (int i = 0; i < nrMasini; i++) {
 		afisareMasina(masini[i]);
@@ -48,7 +48,7 @@ void adaugaMasinaInVector(Masina** masini, int* nrMasini, Masina masinaNoua) {
 Masina citireMasinaFisier(FILE* file) {
 	Masina m;
 	char buffer[100];
-	char separator[4] = ",;\n";
+	char separator[5] = ",;\n";
 	fgets(buffer, 100, file);
 	char* aux;
 	aux = strtok(buffer, separator);
