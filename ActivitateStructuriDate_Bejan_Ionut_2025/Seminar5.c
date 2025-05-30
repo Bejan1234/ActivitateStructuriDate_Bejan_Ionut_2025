@@ -4,7 +4,7 @@
 #include <string.h>
 
 
-struct StructuraMasina {
+struct StructuraMasina {  //Seminar 5 - Liste dublu inlantuite
 	int id;
 	int nrUsi;
 	float pret;
@@ -27,7 +27,7 @@ struct ListaDubla {
 	int nrNoduri;
 };
 typedef struct ListaDubla ListaDubla;
-//*
+
 Masina citireMasinaDinFisier(FILE* file) {
 	char buffer[100];
 	char sep[3] = ",\n";
@@ -49,7 +49,7 @@ Masina citireMasinaDinFisier(FILE* file) {
 	m1.serie = *strtok(NULL, sep);
 	return m1;
 }
-//*
+
 void afisareMasina(Masina masina) {
 	printf("Id: %d\n", masina.id);
 	printf("Nr. usi : %d\n", masina.nrUsi);
@@ -58,7 +58,7 @@ void afisareMasina(Masina masina) {
 	printf("Nume sofer: %s\n", masina.numeSofer);
 	printf("Serie: %c\n\n", masina.serie);
 }
-//*
+
 void afisareListaMasiniDeLaInceput(ListaDubla lista) {
 	Nod* p = lista.first;
 	while (p) {
@@ -66,7 +66,7 @@ void afisareListaMasiniDeLaInceput(ListaDubla lista) {
 		p = p->next;
 	}
 }
-//*
+
 void afisareListaMasiniDeLaSfarsit(ListaDubla lista) {
 	Nod* p = lista.last;
 	while (p) {
@@ -74,7 +74,7 @@ void afisareListaMasiniDeLaSfarsit(ListaDubla lista) {
 		p = p->prev;
 	}
 }
-//*
+
 void adaugaMasinaInLista(ListaDubla* lista, Masina masinaNoua) {
 	Nod* nou = (Nod*)malloc(sizeof(Nod));
 	nou->masina = masinaNoua; //shallow copy
@@ -89,7 +89,7 @@ void adaugaMasinaInLista(ListaDubla* lista, Masina masinaNoua) {
 	lista->last = nou;
 	lista->nrNoduri++;
 }
-//*
+
 void adaugaLaInceputInLista(ListaDubla* lista, Masina masinaNoua) {
 	Nod* nou = (Nod*)malloc(sizeof(Nod));
 	nou->masina = masinaNoua; //shallow copy
@@ -104,7 +104,7 @@ void adaugaLaInceputInLista(ListaDubla* lista, Masina masinaNoua) {
 	lista->first = nou;
 	lista->nrNoduri++;
 }
-//**
+
 ListaDubla citireLDMasiniDinFisier(const char* numeFisier) {
 	//functia primeste numele fisierului, il deschide si citeste toate masinile din fisier
 	//prin apelul repetat al functiei citireMasinaDinFisier()
@@ -120,7 +120,7 @@ ListaDubla citireLDMasiniDinFisier(const char* numeFisier) {
 	fclose(f);
 	return lista;
 }
-//*
+
 void dezalocareLDMasini(ListaDubla* lista) {
 	Nod* p = lista->first;
 	while (p) {
