@@ -2,7 +2,7 @@
 #include<malloc.h>
 #include<string.h>
 
-struct Masina {
+struct Masina {  //	Seminar 2 - Lucru cu vectori de elemente
     int id;
     int anFabricatie;
     char* sofer;
@@ -72,7 +72,7 @@ void dezalocare(struct Masina** vector, int* nrElemente) {
 }
 
 void copiazaMasiniCuMultiKM(struct Masina* vector, int nrElemente, float prag, struct Masina** vectorNou, int* dimensiune) {
-    // 1. Numãrãm câte ma?ini trec de prag
+   
     if (vector != NULL && nrElemente > 0) {
         (*dimensiune) = 0;
         for (int i = 0; i < nrElemente; i++) {
