@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include <string.h>
 
-struct Masina {
+struct Masina {  // Seminar 1 - Lucru cu functii
 	int id;
 	int anFabricatie;
 	char* sofer;
