@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct StructuraMasina {
+struct StructuraMasina { //	Seminar 10 - Arbori binari de cautare echilibrati
 	int id;
 	int nrUsi;
 	float pret;
