@@ -6,7 +6,7 @@
 //trebuie sa folositi fisierul masini.txt
 //sau va creati un alt fisier cu alte date
 
-struct StructuraMasina {
+struct StructuraMasina {  // Seminar 4 - Liste simplu inlnatuite
 	int id;
 	int nrUsi;
 	float pret;
