@@ -6,7 +6,7 @@
 //trebuie sa folositi fisierul masini.txt
 //sau va creati un alt fisier cu alte date
 
-struct StructuraMasina {
+struct StructuraMasina { //Seminar 6 - Hash Table
 	int id;
 	int nrUsi;
 	float pret;
@@ -152,14 +152,40 @@ void afisareTabelaDeMasini(HashTable ht) {
 }
 
 void dezalocareTabelaDeMasini(HashTable* ht) {
-	//sunt dezalocate toate masinile din tabela de dispersie
+	for (int i = 0; i < ht->dim; i++) {
+		Nod* p = ht->vector[i];
+		while (p) {
+			Nod* temp = p;
+			p = p->next;
+			free(temp->info.model);
+			free(temp->info.numeSofer);
+			free(temp);
+		}
+	}
+	free(ht->vector);
+	ht->vector = NULL;
+	ht->dim = 0;
 }
 
 float* calculeazaPreturiMediiPerClustere(HashTable ht, int* nrClustere) {
-	//calculeaza pretul mediu al masinilor din fiecare cluster.
-	//trebuie sa returnam un vector cu valorile medii per cluster.
-	//lungimea vectorului este data de numarul de clustere care contin masini
-	return NULL;
+	float* vector = (float*)malloc(sizeof(float) * ht.dim);
+	*nrClustere = 0;
+
+	for (int i = 0; i < ht.dim; i++) {
+		Nod* p = ht.vector[i];
+		if (p != NULL) {
+			float suma = 0;
+			int count = 0;
+			while (p) {
+				suma += p->info.pret;
+				count++;
+				p = p->next;
+			}
+			vector[*nrClustere] = suma / count;
+			(*nrClustere)++;
+		}
+	}
+	return vector;
 }
 
 Masina getMasinaDupaCheie(HashTable ht, char serie) {
@@ -197,6 +223,14 @@ int main() {
 	else {
 		printf("\nMasina nu a fost gasita\n");
 	}
+	int nrClustere = 0;
+	float* medii = calculeazaPreturiMediiPerClustere(ht, &nrClustere);
+	printf("\nPreturi medii pe clustere:\n");
+	for (int i = 0; i < nrClustere; i++) {
+		printf("Cluster %d: %.2f\n", i + 1, medii[i]);
+	}
+	free(medii);
+	dezalocareTabelaDeMasini(&ht);
 
 	return 0;
 }
