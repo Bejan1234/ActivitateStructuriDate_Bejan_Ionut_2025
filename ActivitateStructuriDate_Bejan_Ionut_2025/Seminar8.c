@@ -6,7 +6,7 @@
 //trebuie sa folositi fisierul masini.txt
 //sau va creati un alt fisier cu alte date
 
-struct StructuraMasina {
+struct StructuraMasina { //	Seminar 8 - Heap
 	int id;
 	int nrUsi;
 	float pret;
