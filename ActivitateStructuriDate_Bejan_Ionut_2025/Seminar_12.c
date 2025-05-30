@@ -4,7 +4,7 @@
 #include <string.h>
 
 
-struct StructuraMasina {
+struct StructuraMasina { //Sablon 12 - Grafuri
 	int id;
 	int nrUsi;
 	float pret;
@@ -60,9 +60,6 @@ struct NodLS
 	NodLP* nodInfo;
 };
 
-//2.
-//functii de inserare in liste
-//si in principala si in secundara
 
 void inserareLP(NodLP** cap, Masina masina)
 {
@@ -90,8 +87,7 @@ void inserareLS(NodLS** cap, NodLP* nodInfo) {
 }
 
 
-//3.
-//functie de cautarea in lista principala dupa ID
+
 NodLP* cautaNodDupaID(NodLP* cap, int id) {
 	while (cap && cap->info.id != id) {
 		cap = cap->next;
@@ -100,8 +96,6 @@ NodLP* cautaNodDupaID(NodLP* cap, int id) {
 }
 
 
-//4.
-//inserare muchie
 void inserareMuchie(NodLP* cap, int idStart, int idStop) {
 	NodLP* nodStart = cautaNodDupaID(cap, idStart);
 	NodLP* nodStop = cautaNodDupaID(cap, idStop);
